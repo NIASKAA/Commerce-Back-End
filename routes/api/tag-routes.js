@@ -38,13 +38,31 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   // create a new tag
-  Tag.create(req.body)
-  .then((tag))
+  Tag.create({
+    newTag: req.body.newTag,
+  })
+  .then((tagData) => res.json(tagData))
+  .catch((err) => {
+    console.log(err);
+    res.status(400).json(err);
+  })
 });
 
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
-  
+  Tag.update({
+    newTag: req.body.newTag,
+  },
+  {
+    where: {
+      id: req.params.id,
+    },
+  })
+  .then((tagData) => res.json(tagData))
+  .catch((err) => {
+    console.log(err);
+    res.status(400).json(err);
+  })
 });
 
 router.delete('/:id', (req, res) => {

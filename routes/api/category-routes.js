@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
     },
     include: [{
       model: Product,
-      attributes: ['getCategory'],
+      attributes: ['category_id'],
     }]
   })
   .then(categoryData => res.json(categoryData))
@@ -40,16 +40,31 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   // create a new category
-  Category.create(req.body)
-  .then((category) => {
-    if(res.body.tagsIds.length) {
-      const 
-    }
+  Category.create({
+    getCategory: req.body.getCategory,
+  })
+  .then((categoryData) => res.json(categoryData))
+  .catch((err) => {
+    console.log(err);
+    res.status(400).json(err);
   })
 });
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
+  Category.update({
+    getCategory: req.body.getCategory,
+  },
+  {
+    where: {
+      id: req.params.id,
+    },
+  })
+  .then((categoryData) => res.json(categoryData))
+  .catch((err) => {
+    console.log(err);
+    res.status(400).json(err);
+  })
 });
 
 router.delete('/:id', (req, res) => {
@@ -58,13 +73,15 @@ router.delete('/:id', (req, res) => {
     where: {
       id: req.params.id,
     },
-  }).then(categoryData => {
+  })
+  .then(categoryData => {
     if(!categoryData) {
       res.status(404).json({message: "Invalid"});
       return;
     }
     res.json(categoryData);
-  }).catch((err) => {
+  })
+  .catch((err) => {
     res.status(500).json(err);
   });
 });
