@@ -14,7 +14,7 @@ Node.js, Javascript, Insomnia, mySql, Express.js, Sequelize
 
 # Links to application
 Link to repo: https://github.com/NIASKAA/Commerce-Back-End \
-Link to Youtube quick walk-through:  
+Link to Youtube quick walk-through: https://youtu.be/dw3J5SPv-X0 \
 
 # Contribution 
 None, only me. 
